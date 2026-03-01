@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Λεύκωμα Χαλβάτσο</title>
     <style>
+        /* ΕΠΑΝΑΦΟΡΑ ΧΡΩΜΑΤΩΝ ΟΠΩΣ ΗΤΑΝ (Εικόνα 2) */
         body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #fdfaf4; color: #4a3b28; margin: 0; padding: 0; line-height: 1.2; }
         
         /* Navbar */
@@ -14,35 +15,41 @@
 
         /* Header */
         .header { background: #4a3b28; color: white; padding: 10px 5px; text-align: center; }
-        .header h1 { margin: 0; font-size: 1.4em; }
-		.header h2 { margin: 0; font-size: 0.8em; }
-        .header p { margin: 0; font-size: 0.8em; opacity: 0.8; }
-        
+        .header h1 { margin: 0; font-size: 1.6em; }
+        .header h2 { margin: 0; font-size: 0.9em; }
+        .header h3 { margin: 0; font-size: 1.0em; }
         .main-container { max-width: 1200px; margin: 5px auto; padding: 0 10px; }
         
+        /* ΜΠΑΡΑ ΑΝΑΖΗΤΗΣΗΣ ΠΟΥ ΔΕΝ ΧΑΛΑΕΙ ΤΟ ΣΤΥΛ */
+        .search-box { text-align: center; margin: 10px 0; }
+        #searchBar { 
+            background: white; border: 1px solid #4a3b28; color: #4a3b28; padding: 6px; 
+            width: 80%; max-width: 400px; border-radius: 2px; font-size: 0.85em; outline: none;
+        }
+
         .section-title { 
             border-bottom: 1px solid #4a3b28; 
-            margin: 15px 0 8px 0; 
-            font-size: 0.9em; 
+            margin: 10px 0 5px 0; 
+            font-size: 0.85em; 
             text-transform: uppercase;
             font-weight: bold;
         }
 
-        /* Η ΜΗΧΑΝΗ ΓΙΑ ΤΑ 6 ΣΤΗΝ ΣΕΙΡΑ */
+        /* 6 ΣΤΗΝ ΣΕΙΡΑ - ΜΙΚΡΟΤΕΡΑ ΚΟΥΜΠΙΑ */
         .group-container { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(15.5%, 1fr)); 
-            gap: 8px; 
-            margin-top: 10px; 
+            gap: 6px; 
+            margin-top: 5px; 
         }
         
         .folder-btn {
             background: white;
             border: 1px solid #4a3b28;
-            padding: 10px 2px;
+            padding: 6px 1px; /* Πιο στενά κουμπιά */
             text-decoration: none;
             color: #4a3b28;
-            font-size: 0.72em; 
+            font-size: 0.68em; /* Ελαφρώς μικρότερο γράμμα */
             font-weight: bold;
             border-radius: 2px;
             text-align: center;
@@ -51,35 +58,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 32px;
+            min-height: 28px; /* Πιο χαμηλό ύψος */
         }
         .folder-btn:hover { background: #fffcf5; box-shadow: none; transform: translate(1px, 1px); }
 
-        /* Για κινητά: 2 στην σειρά */
         @media (max-width: 600px) {
-            .group-container { 
-                grid-template-columns: repeat(auto-fill, minmax(45%, 1fr)); 
-            }
+            .group-container { grid-template-columns: repeat(auto-fill, minmax(45%, 1fr)); }
         }
 
         .footer-info { 
-            background: #eeebe3; 
-            padding: 8px; 
-            border-top: 1px solid #4a3b28; 
-            text-align: center; 
-            margin-top: 20px; 
-            font-size: 0.8em;
+            background: #eeebe3; padding: 8px; border-top: 1px solid #4a3b28; 
+            text-align: center; margin-top: 15px; font-size: 0.9em;
         }
-        .drive-btn { 
-            display: inline-block; 
-            background: #d35400; 
-            color: white; 
-            padding: 4px 10px; 
-            text-decoration: none; 
-            border-radius: 3px; 
-            font-weight: bold; 
-            margin-left: 5px;
-        }
+        .drive-btn { display: inline-block; background: #d35400; color: white; padding: 3px 8px; text-decoration: none; border-radius: 3px; font-weight: bold; margin-left: 5px; }
     </style>
 </head>
 <body>
@@ -94,17 +85,23 @@
     <div class="header">
         <h1>Ψηφιακό Λεύκωμα Κεφαλόβρυσο ( Χαλβάτσο ) </h1>
         <h2>Φωτογραφικό Αρχείο & Αναμνήσεις</h2>
+        <h3>Με ενδειξη 📜 υπαρχει υλικο μεχρι να μπουν και σε αλλες</h2>
+		
     </div>
 
-<div class="main-container">
+    <div class="main-container">
+        <div class="search-box">
+            <input type="text" id="searchBar" placeholder="🔍 Αναζήτηση οικογένειας..." onkeyup="filterNames()">
+        </div>
+
         <h2 class="section-title">👤 Οικογένειες (Αλφαβητικά)</h2>
-        <div class="group-container">
+        <div class="group-container" id="familyGrid">
             <a href="adamopoylos/index.html" class="folder-btn">ΑΔΑΜΟΠΟΥΛΟΣ</a>
             <a href="aleksopoylos/index.html" class="folder-btn">ΑΛΕΞΟΠΟΥΛΟΣ</a>
             <a href="anagnostopoylos/index.html" class="folder-btn">ΑΝΑΓΝΩΣΤΟΠΟΥΛΟΣ</a>
-            <a href="anastasopoulos/index.html" class="folder-btn">ΑΝΑΣΤΑΣΟΠΟΥΛΟΣ</a>
+            <a href="anastasopoulos/index.html" class="folder-btn">📜ΑΝΑΣΤΑΣΟΠΟΥΛΟΣ</a>
             <a href="andrianopoylos/index.html" class="folder-btn">ΑΝΔΡΙΑΝΟΠΟΥΛΟΣ</a>
-            <a href="basilopoylos/index.html" class="folder-btn">ΒΑΣΙΛΟΠΟΥΛΟΣ</a>
+            <a href="basilopoylos/index.html" class="folder-btn">📜ΒΑΣΙΛΟΠΟΥΛΟΣ</a>
             <a href="georgopoylos/index.html" class="folder-btn">ΓΕΩΡΓΟΠΟΥΛΟΣ</a>
             <a href="georgakopoylos/index.html" class="folder-btn">ΓΕΩΡΓΑΚΟΠΟΥΛΟΣ</a>
             <a href="gkotsis/index.html" class="folder-btn">ΓΚΟΤΣΗΣ</a>
@@ -115,25 +112,25 @@
             <a href="theodosopoylos/index.html" class="folder-btn">ΘΕΟΔΟΣΟΠΟΥΛΟΣ</a>
             <a href="sarkoylas/index.html" class="folder-btn">ΣΑΡΚΟΥΛΑΣ</a>
             <a href="tsaoyshs/index.html" class="folder-btn">ΤΣΑΟΥΣΗΣ</a>
-            <a href="kalofolias/index.html" class="folder-btn">ΚΑΛΟΦΩΛΙΑΣ</a>
-            <a href="konstantopoylos/index.html" class="folder-btn">ΚΩΝΣΤΑΝΤΟΠΟΥΛΟΣ</a>
+            <a href="kalofolias/index.html" class="folder-btn">📜ΚΑΛΟΦΩΛΙΑΣ</a>
+            <a href="konstantopoylos/index.html" class="folder-btn">📜ΚΩΝΣΤΑΝΤΟΠΟΥΛΟΣ</a>
             <a href="maniaths/index.html" class="folder-btn">ΜΑΝΙΑΤΗΣ</a>
             <a href="maxairas/index.html" class="folder-btn">ΜΑΧΑΙΡΑΣ</a>
             <a href="moyggos/index.html" class="folder-btn">ΜΟΥΓΓΟΣ</a>
-            <a href="panagiotopoylos/index.html" class="folder-btn">ΠΑΝΑΓΙΩΤΟΠΟΥΛΟΣ</a>
+            <a href="panagiotopoylos/index.html" class="folder-btn">📜ΠΑΝΑΓΙΩΤΟΠΟΥΛΟΣ</a>
             <a href="stefanoy/index.html" class="folder-btn">ΣΤΕΦΑΝΟΥ</a>
             <a href="flaoynas/index.html" class="folder-btn">ΦΛΑΟΥΝΑΣ</a>
             <a href="xristopoylos/index.html" class="folder-btn">ΧΡΙΣΤΟΠΟΥΛΟΣ</a>
             <a href="synexeia/index.html" class="folder-btn">ΣΥΝΕΧΕΙΑ....</a>
         </div>
 
-		<h2 class="section-title">👥 Συνάξεις</h2>
+        <h2 class="section-title">👥 Συνάξεις</h2>
         <div class="group-container">
-            <a href="plateia/index.html" class="folder-btn">Στις Πλατείες</a>
+            <a href="plateia/index.html" class="folder-btn">📜Στις Πλατείες</a>
             <a href="geitonies/index.html" class="folder-btn">Στις Γειτονιές</a>
             <a href="gamoi/index.html" class="folder-btn">Σε Γάμους-Βαφτίσεις</a>
-            <a href="xorafia/index.html" class="folder-btn">Στα Χωράφια</a>
-            <a href="ethima/index.html" class="folder-btn">Απόκριες-Θέρος-Τρύγος</a>
+            <a href="xorafia/index.html" class="folder-btn">Στα Χωράφια-Θέρος-Τρύγος</a>
+            <a href="ethima/index.html" class="folder-btn">Απόκριες</a>
         </div>
 
         <h2 class="section-title">🎉 Εκδηλώσεις</h2>
@@ -141,17 +138,24 @@
             <a href="panhgyria/index.html" class="folder-btn">Πανηγύρια</a>
             <a href="sxoleio/index.html" class="folder-btn">Σχολείο</a>
             <a href="ekdromes/index.html" class="folder-btn">Εκδρομές</a>
-			<a href="koulkada/index.html" class="folder-btn">ΚΟΥΛΚΑΔΑ</a>
+            <a href="koulkada/index.html" class="folder-btn">ΚΟΥΛΚΑΔΑ</a>
+			<a href="efhmerida/index.html" class="folder-btn">ΕΦΗΜΕΡΙΔΑ</a>
         </div>
-
     </div>
 
     <div class="footer-info">
-        <span>Στείλτε μου Υλικό, να ετοιμάζω στο <strong>xalbant@gmail.com</strong> ή στο</span>
-        <a href="https://drive.google.com/drive/folders/1Wj_9cVgeJ-h7R1Qk7IHkKCcTRgxNeq9j?usp=drive_link" class="drive-btn" target="_blank">Google Drive</a>
+        Στείλτε υλικό στο xalbant@gmail.com ή στο <a href="https://drive.google.com/drive/folders/1Wj_9cVgeJ-h7R1Qk7IHkKCcTRgxNeq9j?usp=drive_link" class="drive-btn" target="_blank">Google Drive</a>
     </div>
 
+    <script>
+        function filterNames() {
+            let input = document.getElementById('searchBar').value.toLowerCase();
+            let buttons = document.getElementsByClassName('folder-btn');
+            for (let i = 0; i < buttons.length; i++) {
+                let name = buttons[i].textContent || buttons[i].innerText;
+                buttons[i].style.display = name.toLowerCase().includes(input) ? "" : "none";
+            }
+        }
+    </script>
 </body>
-
 </html>
-
