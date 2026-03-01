@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Φωτογραφικό Αρχείο - Χαλβάτσο</title>
+    <style>
+        /* ΣΤΥΛ ΣΕΛΙΔΑΣ */
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f4f1ea; color: #4a3b28; margin: 0; padding: 15px; text-align: center; }
+        
+        .back-nav { text-align: left; margin-bottom: 15px; }
+        .back-nav a { color: #4a3b28; text-decoration: none; font-weight: bold; font-size: 0.9em; border: 1px solid #4a3b28; padding: 5px 10px; border-radius: 4px; }
+        
+        #searchBar { padding: 10px; width: 90%; max-width: 400px; margin-bottom: 25px; border: 1px solid #4a3b28; border-radius: 4px; font-size: 1em; }
+
+        /* GALLERY GRID */
+        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; max-width: 1200px; margin: auto; }
+        .photo-card { background: white; padding: 8px; border: 1px solid #ccc; cursor: pointer; transition: 0.3s; box-shadow: 2px 2px 8px rgba(0,0,0,0.1); }
+        .photo-card:hover { transform: translateY(-5px); box-shadow: 4px 4px 12px rgba(0,0,0,0.2); }
+        .photo-card img { width: 100%; height: 160px; object-fit: cover; display: block; }
+        .file-label { font-size: 0.8em; margin-top: 8px; color: #666; font-weight: bold; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+        /* LIGHTBOX (ΜΕΓΑΛΗ ΕΙΚΟΝΑ) */
+        #lb { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); flex-direction: column; justify-content: center; align-items: center; }
+        #lb img { max-width: 90%; max-height: 75%; border: 3px solid white; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        #lbDesc { color: white; margin-top: 20px; padding: 0 20px; font-size: 1.2em; max-width: 800px; line-height: 1.5; }
+        
+        /* NAVIGATION BUTTONS */
+        .nav-btn { color: white; font-size: 50px; position: absolute; cursor: pointer; user-select: none; transition: 0.3s; padding: 10px; }
+        .nav-btn:hover { color: #d35400; }
+        .prev { left: 10px; top: 50%; transform: translateY(-50%); }
+        .next { right: 10px; top: 50%; transform: translateY(-50%); }
+        .close { top: 10px; right: 20px; font-size: 60px; }
+    </style>
+</head>
+<body>
+
+    <div class="back-nav">
+        <a href="index.html">← Πίσω στο Μενού</a>
+    </div>
+
+    <input type="text" id="searchBar" placeholder="Αναζήτηση σε ονόματα & περιγραφές..." onkeyup="doSearch()">
+
+    <div class="gallery" id="mainGallery">
+        </div>
+
+    <div id="lb">
+        <span class="close nav-btn" onclick="closeBox()">&times;</span>
+        <span class="prev nav-btn" onclick="move(-1)">&#10094;</span>
+        <img id="boxImg" src="">
+        <div id="lbDesc"></div>
+        <span class="next nav-btn" onclick="move(1)">&#10095;</span>
+    </div>
+
+    <script>
+        // ==========================================================
+        // ΜΑΣΤΟΡΑ, ΕΔΩ ΓΡΑΦΕΙΣ ΤΑ ΔΕΔΟΜΕΝΑ ΣΟΥ
+        // ==========================================================
+        const photos = [
+            { 
+                file: "ilias-anastas1.jpg", 
+                desc: "Η ομάδα έτοιμη μπροστά από του Τσαούση το παλιό καφενείο. Διακρίνονται οι Ηλίας και Αναστάσης." 
+            },
+            { 
+                file: "giannis-papadopoulos.jpg", 
+                desc: "Ο θείος Γιάννης στο μάζεμα της ελιάς, περίπου το 1965." 
+            },
+            { 
+                file: "panigiri-1.jpg", 
+                desc: "Το μεγάλο πανηγύρι του Αυγούστου στην πλατεία." 
+            }
+            // Πρόσθεσε εδώ τις επόμενες φωτό σου με την ίδια δομή
+        ];
+
+        // Η διαδρομή για τον φάκελο με τις φωτογραφίες
+        const path = ""; 
+
+        const gallery = document.getElementById('mainGallery');
+        let currentIdx = 0;
+
+        // ΔΗΜΙΟΥΡΓΙΑ GALLERY
+        function initGallery() {
+            photos.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'photo-card';
+                card.innerHTML = `
+                    <img src="${path}${item.file}" loading="lazy" alt="${item.file}">
+                    <div class="file-label">${item.file.replace('.jpg', '')}</div>
+                `;
+                card.onclick = () => openBox(index);
+                gallery.appendChild(card);
+            });
+        }
+
+        // ΑΝΟΙΓΜΑ LIGHTBOX
+        function openBox(index) {
+            currentIdx = index;
+            updateLightbox();
+            document.getElementById('lb').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Κλειδώνει το σκρολάρισμα πίσω
+        }
+
+        // ΚΛΕΙΣΙΜΟ LIGHTBOX
+        function closeBox() {
+            document.getElementById('lb').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // ΕΝΗΜΕΡΩΣΗ ΠΕΡΙΕΧΟΜΕΝΟΥ LIGHTBOX
+        function updateLightbox() {
+            const current = photos[currentIdx];
+            document.getElementById('boxImg').src = path + current.file;
+            document.getElementById('lbDesc').innerHTML = `<strong>${current.file}</strong><br>${current.desc}`;
+        }
+
+        // ΕΠΟΜΕΝΗ / ΠΡΟΗΓΟΥΜΕΝΗ
+        function move(step) {
+            currentIdx = (currentIdx + step + photos.length) % photos.length;
+            updateLightbox();
+        }
+
+        // ΑΝΑΖΗΤΗΣΗ (SEARCH)
+        function doSearch() {
+            let val = document.getElementById('searchBar').value.toLowerCase();
+            let cards = document.querySelectorAll('.photo-card');
+            cards.forEach((card, i) => {
+                let match = photos[i].file.toLowerCase().includes(val) || 
+                            photos[i].desc.toLowerCase().includes(val);
+                card.style.display = match ? "block" : "none";
+            });
+        }
+
+        // Κλείσιμο με το πλήκτρο Esc
+        window.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") closeBox();
+            if (e.key === "ArrowRight") move(1);
+            if (e.key === "ArrowLeft") move(-1);
+        });
+
+        // Εκκίνηση
+        initGallery();
+
+    </script>
+</body>
+</html>
