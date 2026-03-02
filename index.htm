@@ -79,6 +79,19 @@
 </head>
 <body>
 
+<audio id="bg-music" autoplay loop>
+  <source src="mp311.mp3" type="audio/mpeg">
+  Ο browser σου δεν υποστηρίζει μουσική.
+</audio>
+
+<script>
+  // Επειδή τα κινητά απαγορεύουν την αυτόματη αναπαραγωγή, 
+  // η μουσική θα ξεκινάει μόλις ο χρήστης κάνει το πρώτο κλικ στη σελίδα.
+  document.addEventListener('click', function() {
+    var audio = document.getElementById('bg-music');
+    audio.play();
+  }, { once: true });
+</script>
     <nav class="navbar">
         <a href="https://el.wikipedia.org/wiki/Κεφαλόβρυσο_Μεσσηνίας" target="_blank">Wikipedia</a>
         <a href="https://kefalovrysso.gr/" target="_blank">Site</a>
@@ -123,7 +136,7 @@
             <a href="moyggos/index.html" class="folder-btn">ΜΟΥΓΓΟΣ</a>
             <a href="panagiotopoylos/index.html" class="folder-btn">📜ΠΑΝΑΓΙΩΤΟΠΟΥΛΟΣ</a>
             <a href="stefanoy/index.html" class="folder-btn">ΣΤΕΦΑΝΟΥ</a>
-            <a href="flaoynas/index.html" class="folder-btn">ΦΛΑΟΥΝΑΣ</a>
+            <a href="flaoynas/index.html" class="folder-btn">📜ΦΛΑΟΥΝΑΣ</a>
             <a href="xristopoylos/index.html" class="folder-btn">ΧΡΙΣΤΟΠΟΥΛΟΣ</a>
             <a href="diafores/index.html" class="folder-btn">ΔΙΑΦΟΡΕΣ</a>
         </div>
@@ -135,7 +148,7 @@
             <a href="geitonies/index.html" class="folder-btn">Στις Γειτονιές</a>
             <a href="gamoi/index.html" class="folder-btn">Σε Γάμους-Βαφτίσεις</a>
             <a href="xorafia/index.html" class="folder-btn">Χωράφια-Θέρος-Τρύγος</a>
-            <a href="ethima/index.html" class="folder-btn">Απόκριες-Πάσχα</a>
+            <a href="ethima/index.html" class="folder-btn">Απόκριες - Πάσχα</a>
             <a href="panhgyria/index.html" class="folder-btn">📜Πανηγύρια</a>
             <a href="sxoleio/index.html" class="folder-btn">ΣΧΟΛΕΙΟ</a>
             <a href="ekdromes/index.html" class="folder-btn">ΕΚΔΡΟΜΕΣ</a>
@@ -163,4 +176,3 @@
     </script>
 </body>
 </html>
-
