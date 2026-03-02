@@ -17,9 +17,11 @@
         .header { background: #4a3b28; color: white; padding: 10px 5px; text-align: center; }
         h1, .folder-btn {
     font-family: "Comic Sans MS", cursive;
-						}
+	margin: 0; font-size: 1.5em;
+    color: #b8f2a6; 
+}
         .header h2 { margin: 0; font-size: 0.9em; }
-        .header h3 { margin: 0; font-size: 1.0em; }
+        .header h3 { margin: 0; font-size: 0.8em; }
         .main-container { max-width: 1200px; margin: 5px auto; padding: 0 10px; }
         
         /* ΜΠΑΡΑ ΑΝΑΖΗΤΗΣΗΣ ΠΟΥ ΔΕΝ ΧΑΛΑΕΙ ΤΟ ΣΤΥΛ */
@@ -30,7 +32,7 @@
         }
 
         .section-title { 
-            border-bottom: 1px solid #4a3b28; 
+            border-bottom: 0px solid #4a3b28; 
             margin: 10px 0 5px 0; 
             font-size: 0.85em; 
             text-transform: uppercase;
@@ -87,7 +89,7 @@
     <div class="header">
         <h1>Ψηφιακό Λεύκωμα Κεφαλόβρυσο ( Χαλβάτσο ) </h1>
         <h2>Φωτογραφικό Αρχείο & Αναμνήσεις & αυτοί που φύγαν</h2>
-        <h3>Με ενδειξη 📜 υπαρχει υλικο μεχρι να μπουν και σε αλλες</h2>
+        <h3>Με ένδειξη 📜 υπάρχει υλικό, μέχρι να μπει και σε άλλες ενότητες</h2>
 		
     </div>
 
@@ -96,8 +98,8 @@
             <input type="text" id="searchBar" placeholder="🔍 Αναζήτηση οικογένειας..." onkeyup="filterNames()">
         </div>
 
-        <h2 class="section-title">👤 Οικογένειες (Αλφαβητικά)</h2>
-		<h2 class="section-title"></h2>
+		<h2 class="section-title">👤 Οικογένειες (Αλφαβητικά)</h2>
+		<div style="margin-bottom: 15px;"></div>
 		
         <div class="group-container" id="familyGrid">
             <a href="adamopoylos/index.html" class="folder-btn">ΑΔΑΜΟΠΟΥΛΟΣ</a>
@@ -127,7 +129,7 @@
         </div>
 
         <h2 class="section-title">👥 Συνάξεις - 🎉 Εκδηλώσεις</h2>
-		<h2 class="section-title"></h2>
+		<div style="margin-bottom: 15px;"></div>
         <div class="group-container">
             <a href="plateia/index.html" class="folder-btn">📜Στις Πλατείες</a>
             <a href="geitonies/index.html" class="folder-btn">Στις Γειτονιές</a>
@@ -135,8 +137,8 @@
             <a href="xorafia/index.html" class="folder-btn">Χωράφια-Θέρος-Τρύγος</a>
             <a href="ethima/index.html" class="folder-btn">Απόκριες - Πάσχα</a>
             <a href="panhgyria/index.html" class="folder-btn">📜Πανηγύρια</a>
-            <a href="sxoleio/index.html" class="folder-btn">Σχολείο</a>
-            <a href="ekdromes/index.html" class="folder-btn">Εκδρομές</a>
+            <a href="sxoleio/index.html" class="folder-btn">ΣΧΟΛΕΙΟ</a>
+            <a href="ekdromes/index.html" class="folder-btn">ΕΚΔΡΟΜΕΣ</a>
             <a href="koulkada/index.html" class="folder-btn">📜ΚΟΥΛΚΑΔΑ</a>
 			<a href="topia/index.html" class="folder-btn">📜Τ Ο Π Ι Α</a>
 			<a href="efhmerida/index.html" class="folder-btn">ΕΦΗΜΕΡΙΔΑ</a>
