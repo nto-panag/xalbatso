@@ -99,43 +99,15 @@
         <span class="close">&times;</span>
         <img id="expandedImg">
     </div>
-<script>
-function filterNames() {
-  const input = normalizeGreek(
-    document.getElementById("searchBar").value
-  );
 
-  const buttons = document.getElementsByClassName("folder-btn");
-  const dataBlocks = document.querySelectorAll("#search-data div");
-
-  for (let i = 0; i < buttons.length; i++) {
-
-    const familyName = normalizeGreek(
-      buttons[i].innerText
-        .replace(/[^Α-Ωα-ωΆ-Ώά-ώ ]/g, "")
-        .trim()
-    );
-
-    let found = familyName.includes(input);
-
-    dataBlocks.forEach(block => {
-      const fam = normalizeGreek(block.getAttribute("data-family"));
-      const text = normalizeGreek(block.innerText);
-
-      if (fam === familyName && text.includes(input)) {
-        found = true;
-      }
-    });
-
-    buttons[i].style.display = found ? "" : "none";
-  }
-}
-</script>
     <script>
         // --- ΕΔΩ ΠΡΟΣΘΕΤΕΙΣ ΤΙΣ ΦΩΤΟΓΡΑΦΙΕΣ ΣΟΥ ---
         // Format: ["Όνομα_Αρχείου.jpg", "Λεζάντα Φωτογραφίας"]
         const myPhotos = [
             ["scr1.jpg", "Τακης & Μαρια Παναγιωτοπουλος....."],
+			["scr21.jpg", "Νικος Παναγιωτοπουλος "],
+			["scr22.jpg", "Νικος & Τακης Παναγιωτοπουλος"],
+			["scr23.jpg", "Στάυρος & Αλέκα Παναγιωτοπουλος"],
             ["scr2.jpg", "Θανασης "],
 			["scr3.jpg", "Στο παλιο καφενειο . Μαρια , Χιονης και αλλοι"],
 			["scr4.jpg", "Μαρια, Αντωνης , Γιαννης"],
