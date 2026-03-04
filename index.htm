@@ -4,56 +4,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Λεύκωμα Χαλβάτσο</title>
-    <style>
-        /* ΕΠΑΝΑΦΟΡΑ ΧΡΩΜΑΤΩΝ ΟΠΩΣ ΗΤΑΝ (Εικόνα 2) */
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #fdfaf4; color: #4a3b28; margin: 0; padding: 0; line-height: 1.2; }
-        
-        /* Navbar */
-        .navbar { background: #333; padding: 4px 15px; display: flex; justify-content: flex-end; gap: 10px; align-items: center; }
-        .navbar a { color: #f1e1c1; text-decoration: none; font-size: 0.8em; }
-        .fb-link { background: #3b5998; color: white !important; padding: 1px 6px; border-radius: 2px; font-weight: bold; }
 
-        /* Header */
-        .header { background: #4a3b28; color: white; padding: 10px 5px; text-align: center; }
-        h1, .folder-btn {
-    font-family: "Arial", cursive;
-	margin: 0; font-size: 1.5em;
-    color: #b8f2a6; 
-}
-        .header h2 { margin: 0; font-size: 0.9em; }
-        .header h3 { margin: 0; font-size: 0.8em; }
-        .main-container { max-width: 1200px; margin: 5px auto; padding: 0 10px; }
-        
-        /* ΜΠΑΡΑ ΑΝΑΖΗΤΗΣΗΣ ΠΟΥ ΔΕΝ ΧΑΛΑΕΙ ΤΟ ΣΤΥΛ */
-        .search-box { text-align: center; margin: 10px 0; }
-        #searchBar { 
-            background: white; border: 1px solid #4a3b28; padding: 6px; 
-            width: 80%; max-width: 400px; border-radius: 2px; font-size: 0.85em; outline: none;
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: #fdfaf4;
+            color: #4a3b28;
+            margin: 0;
+            padding: 0;
+            line-height: 1.2;
         }
 
-        .section-title { 
-            border-bottom: 0px solid #4a3b28; 
-            margin: 10px 0 5px 0; 
-            font-size: 0.85em; 
+        /* NAVBAR */
+        .navbar {
+            background: #333;
+            padding: 4px 15px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            align-items: center;
+        }
+        .navbar a {
+            color: #f1e1c1;
+            text-decoration: none;
+            font-size: 0.8em;
+        }
+        .fb-link {
+            background: #3b5998;
+            color: white !important;
+            padding: 1px 6px;
+            border-radius: 2px;
+            font-weight: bold;
+        }
+
+        /* HEADER */
+        .header {
+            background: #4a3b28;
+            color: white;
+            padding: 10px 5px;
+            text-align: center;
+        }
+        h1, .folder-btn {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            font-size: 1.5em;
+            color: #b8f2a6;
+        }
+        .header h2 { margin: 0; font-size: 0.9em; }
+        .header h3 { margin: 0; font-size: 0.8em; }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 5px auto;
+            padding: 0 10px;
+        }
+
+        /* SEARCH */
+        .search-box {
+            text-align: center;
+            margin: 10px 0;
+        }
+        #searchBar {
+            background: white;
+            border: 1px solid #4a3b28;
+            color: #4a3b28;
+            padding: 6px;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 2px;
+            font-size: 0.85em;
+            outline: none;
+        }
+
+        .section-title {
+            margin: 10px 0 5px 0;
+            font-size: 0.85em;
             text-transform: uppercase;
             font-weight: bold;
         }
 
-        /* 6 ΣΤΗΝ ΣΕΙΡΑ - ΜΙΚΡΟΤΕΡΑ ΚΟΥΜΠΙΑ */
-        .group-container { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(15.5%, 1fr)); 
-            gap: 6px; 
-            margin-top: 5px; 
+        /* GRID */
+        .group-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(15.5%, 1fr));
+            gap: 6px;
+            margin-top: 5px;
         }
-        
+
         .folder-btn {
             background: white;
             border: 1px solid #4a3b28;
-            padding: 6px 1px; /* Πιο στενά κουμπιά */
+            padding: 6px 1px;
             text-decoration: none;
             color: #4a3b28;
-            font-size: 0.68em; /* Ελαφρώς μικρότερο γράμμα */
+            font-size: 0.68em;
             font-weight: bold;
             border-radius: 2px;
             text-align: center;
@@ -62,119 +106,172 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 28px; /* Πιο χαμηλό ύψος */
+            min-height: 28px;
         }
-        .folder-btn:hover { background: #fffcf5; box-shadow: none; transform: translate(1px, 1px); }
+        .folder-btn:hover {
+            background: #fffcf5;
+            box-shadow: none;
+            transform: translate(1px, 1px);
+        }
 
         @media (max-width: 600px) {
-            .group-container { grid-template-columns: repeat(auto-fill, minmax(45%, 1fr)); }
+            .group-container {
+                grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+            }
         }
 
-        .footer-info { 
-            background: #eeebe3; padding: 8px; border-top: 1px solid #4a3b28; 
-            text-align: center; margin-top: 15px; font-size: 0.9em;
+        /* FOOTER */
+        .footer-info {
+            background: #eeebe3;
+            padding: 8px;
+            border-top: 1px solid #4a3b28;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.9em;
         }
-        .drive-btn { display: inline-block; background: #d35400; color: white; padding: 3px 8px; text-decoration: none; border-radius: 3px; font-weight: bold; margin-left: 5px; }
+        .drive-btn {
+            display: inline-block;
+            background: #d35400;
+            color: white;
+            padding: 3px 8px;
+            text-decoration: none;
+            border-radius: 3px;
+            font-weight: bold;
+            margin-left: 5px;
+        }
     </style>
 </head>
+
 <body>
 
-<audio id="bg-music" autoplay loop>
+<audio id="bg-music" loop>
   <source src="mp311.mp3" type="audio/mpeg">
-  Ο browser σου δεν υποστηρίζει μουσική.
 </audio>
 
 <script>
-  // Επειδή τα κινητά απαγορεύουν την αυτόματη αναπαραγωγή, 
-  // η μουσική θα ξεκινάει μόλις ο χρήστης κάνει το πρώτο κλικ στη σελίδα.
-  document.addEventListener('click', function() {
-    var audio = document.getElementById('bg-music');
-    audio.play();
-  }, { once: true });
+document.addEventListener('click', function () {
+    document.getElementById('bg-music').play();
+}, { once: true });
 </script>
-    <nav class="navbar">
-        <a href="https://el.wikipedia.org/wiki/Κεφαλόβρυσο_Μεσσηνίας" target="_blank">Wikipedia</a>
-        <a href="https://kefalovrysso.gr/" target="_blank">Site</a>
-        <a href="https://www.facebook.com/groups/xalbatsou" target="_blank" class="fb-link">f Χωριό</a>
-        <a href="https://www.facebook.com/xalbatsou" target="_blank" class="fb-link">f Σύλλογος</a>
-    </nav>
 
-    <div class="header">
-        <h1>Ψηφιακό Λεύκωμα Κεφαλόβρυσο ( Χαλβάτσο ) </h1>
-        <h2>Φωτογραφικό Αρχείο & Αναμνήσεις & αυτοί που φύγαν</h2>
-        <h3>Με ένδειξη 📜 υπάρχει υλικό, μέχρι να μπει και σε άλλες ενότητες</h2>
-		
-    </div>
+<nav class="navbar">
+    <a href="https://el.wikipedia.org/wiki/Κεφαλόβρυσο_Μεσσηνίας" target="_blank">Wikipedia</a>
+    <a href="https://kefalovrysso.gr/" target="_blank">Site</a>
+    <a href="https://www.facebook.com/groups/xalbatsou" target="_blank" class="fb-link">f Χωριό</a>
+    <a href="https://www.facebook.com/xalbatsou" target="_blank" class="fb-link">f Σύλλογος</a>
+</nav>
 
-    <div class="main-container">
-        <div class="search-box">
-            <input type="text" id="searchBar" placeholder="🔍 Αναζήτηση οικογένειας..." onkeyup="filterNames()">
-        </div>
+<div class="header">
+    <h1>Ψηφιακό Λεύκωμα Κεφαλόβρυσο ( Χαλβάτσο )</h1>
+    <h2>Φωτογραφικό Αρχείο & Αναμνήσεις & αυτοί που φύγαν</h2>
+    <h3>Με ένδειξη 📜 υπάρχει υλικό</h3>
+</div>
 
-		<h2 class="section-title">👤 Οικογένειες (Αλφαβητικά)</h2>
-		<div style="margin-bottom: 15px;"></div>
-		
-        <div class="group-container" id="familyGrid">
-            <a href="adamopoylos/index.html" class="folder-btn">ΑΔΑΜΟΠΟΥΛΟΣ</a>
-            <a href="anastasopoulos/index.html" class="folder-btn">📜ΑΝΑΣΤΑΣΟΠΟΥΛΟΣ</a>
-            <a href="andrianopoylos/index.html" class="folder-btn">ΑΝΔΡΙΑΝΟΠΟΥΛΟΣ</a>
-            <a href="basilopoylos/index.html" class="folder-btn">📜ΒΑΣΙΛΟΠΟΥΛΟΣ</a>
-            <a href="georgopoylos/index.html" class="folder-btn">ΓΕΩΡΓΟΠΟΥΛΟΣ</a>
-            <a href="georgakopoylos/index.html" class="folder-btn">ΓΕΩΡΓΑΚΟΠΟΥΛΟΣ</a>
-            <a href="gkotsis/index.html" class="folder-btn">ΓΚΟΤΣΗΣ</a>
-            <a href="dimitrakopoylos/index.html" class="folder-btn">ΔΗΜΗΤΡΑΚΟΠΟΥΛΟΣ</a>
-            <a href="diakoymhs/index.html" class="folder-btn">ΔΙΑΚΟΥΜΗΣ</a>
-            <a href="dionysopoylos/index.html" class="folder-btn">ΔΙΟΝΥΣΟΠΟΥΛΟΣ</a>
-            <a href="theodorakopoylos/index.html" class="folder-btn">ΘΕΟΔΩΡΑΚΟΠΟΥΛΟΣ</a>
-            <a href="theodosopoylos/index.html" class="folder-btn">ΘΕΟΔΟΣΟΠΟΥΛΟΣ</a>
-            <a href="sarkoylas/index.html" class="folder-btn">ΣΑΡΚΟΥΛΑΣ</a>
-            <a href="tsaoyshs/index.html" class="folder-btn">ΤΣΑΟΥΣΗΣ</a>
-            <a href="kalofolias/index.html" class="folder-btn">📜ΚΑΛΟΦΩΛΙΑΣ</a>
-            <a href="konstantopoylos/index.html" class="folder-btn">📜ΚΩΝΣΤΑΝΤΟΠΟΥΛΟΣ</a>
-            <a href="maniaths/index.html" class="folder-btn">ΜΑΝΙΑΤΗΣ</a>
-            <a href="maxairas/index.html" class="folder-btn">📜ΜΑΧΑΙΡΑΣ</a>
-            <a href="moyggos/index.html" class="folder-btn">ΜΟΥΓΓΟΣ</a>
-            <a href="panagiotopoylos/index.html" class="folder-btn">📜ΠΑΝΑΓΙΩΤΟΠΟΥΛΟΣ</a>
-            <a href="stefanoy/index.html" class="folder-btn">ΣΤΕΦΑΝΟΥ</a>
-            <a href="flaoynas/index.html" class="folder-btn">📜ΦΛΑΟΥΝΑΣ</a>
-            <a href="xristopoylos/index.html" class="folder-btn">ΧΡΙΣΤΟΠΟΥΛΟΣ</a>
-            <a href="diafores/index.html" class="folder-btn">ΔΙΑΦΟΡΕΣ</a>
-        </div>
+<div class="main-container">
 
-        <h2 class="section-title">👥 Συνάξεις - 🎉 Εκδηλώσεις</h2>
-		<div style="margin-bottom: 15px;"></div>
-        <div class="group-container">
-            <a href="plateia/index.html" class="folder-btn">📜Στις Πλατείες</a>
-            <a href="geitonies/index.html" class="folder-btn">Στις Γειτονιές</a>
-            <a href="gamoi/index.html" class="folder-btn">Σε Γάμους-Βαφτίσεις</a>
-            <a href="xorafia/index.html" class="folder-btn">Χωράφια-Θέρος-Τρύγος</a>
-            <a href="ethima/index.html" class="folder-btn">Απόκριες - Πάσχα</a>
-            <a href="panhgyria/index.html" class="folder-btn">📜Πανηγύρια</a>
-            <a href="sxoleio/index.html" class="folder-btn">ΣΧΟΛΕΙΟ</a>
-            <a href="ekdromes/index.html" class="folder-btn">📜ΕΚΔΡΟΜΕΣ</a>
-            <a href="koulkada/index.html" class="folder-btn">📜ΚΟΥΛΚΑΔΑ</a>
-			<a href="topia/index.html" class="folder-btn">📜Τ Ο Π Ι Α</a>
-			<a href="efhmerida/index.html" class="folder-btn">ΕΦΗΜΕΡΙΔΑ</a>
-			<a href="ekklhsies/index.html" class="folder-btn">📜ΕΚΚΛΗΣΙΕΣ-ΑΞΙΟΘΕΑΤΑ</a>
-			
-        </div>
-    </div>
+<div class="search-box">
+    <input type="text" id="searchBar" placeholder="🔍 Αναζήτηση οικογένειας, ατόμων , τίτλων" onkeyup="filterNames()">
+</div>
 
-    <div class="footer-info">
-        Στείλτε υλικό στο xalbant@gmail.com ή στο <a href="https://drive.google.com/drive/folders/1Wj_9cVgeJ-h7R1Qk7IHkKCcTRgxNeq9j?usp=drive_link" class="drive-btn" target="_blank">Google Drive</a>
-    </div>
+<h2 class="section-title">👤 Οικογένειες (Αλφαβητικά)</h2>
+<div class="group-container">
 
-    <script>
-        function filterNames() {
-            let input = document.getElementById('searchBar').value.toLowerCase();
-            let buttons = document.getElementsByClassName('folder-btn');
-            for (let i = 0; i < buttons.length; i++) {
-                let name = buttons[i].textContent || buttons[i].innerText;
-                buttons[i].style.display = name.toLowerCase().includes(input) ? "" : "none";
-            }
-        }
-    </script>
+    <!-- ΟΙΚΟΓΕΝΕΙΕΣ -->
+    <a href="adamopoylos/index.html" class="folder-btn">ΑΔΑΜΟΠΟΥΛΟΣ</a>
+    <a href="anastasopoulos/index.html" class="folder-btn">📜ΑΝΑΣΤΑΣΟΠΟΥΛΟΣ</a>
+    <a href="andrianopoylos/index.html" class="folder-btn">ΑΝΔΡΙΑΝΟΠΟΥΛΟΣ</a>
+    <a href="basilopoylos/index.html" class="folder-btn">📜ΒΑΣΙΛΟΠΟΥΛΟΣ</a>
+    <a href="georgopoylos/index.html" class="folder-btn">ΓΕΩΡΓΟΠΟΥΛΟΣ</a>
+    <a href="georgakopoylos/index.html" class="folder-btn">ΓΕΩΡΓΑΚΟΠΟΥΛΟΣ</a>
+    <a href="gkotsis/index.html" class="folder-btn">ΓΚΟΤΣΗΣ</a>
+    <a href="dimitrakopoylos/index.html" class="folder-btn">ΔΗΜΗΤΡΑΚΟΠΟΥΛΟΣ</a>
+    <a href="diakoymhs/index.html" class="folder-btn">ΔΙΑΚΟΥΜΗΣ</a>
+    <a href="dionysopoylos/index.html" class="folder-btn">ΔΙΟΝΥΣΟΠΟΥΛΟΣ</a>
+    <a href="theodorakopoylos/index.html" class="folder-btn">ΘΕΟΔΩΡΑΚΟΠΟΥΛΟΣ</a>
+    <a href="theodosopoylos/index.html" class="folder-btn">ΘΕΟΔΟΣΟΠΟΥΛΟΣ</a>
+    <a href="sarkoylas/index.html" class="folder-btn">ΣΑΡΚΟΥΛΑΣ</a>
+    <a href="tsaoyshs/index.html" class="folder-btn">ΤΣΑΟΥΣΗΣ</a>
+    <a href="kalofolias/index.html" class="folder-btn">📜ΚΑΛΟΦΩΛΙΑΣ</a>
+    <a href="konstantopoylos/index.html" class="folder-btn">📜ΚΩΝΣΤΑΝΤΟΠΟΥΛΟΣ</a>
+    <a href="maniaths/index.html" class="folder-btn">ΜΑΝΙΑΤΗΣ</a>
+    <a href="maxairas/index.html" class="folder-btn">📜ΜΑΧΑΙΡΑΣ</a>
+    <a href="moyggos/index.html" class="folder-btn">ΜΟΥΓΓΟΣ</a>
+    <a href="panagiotopoylos/index.html" class="folder-btn">📜ΠΑΝΑΓΙΩΤΟΠΟΥΛΟΣ</a>
+    <a href="stefanoy/index.html" class="folder-btn">ΣΤΕΦΑΝΟΥ</a>
+    <a href="flaoynas/index.html" class="folder-btn">📜ΦΛΑΟΥΝΑΣ</a>
+    <a href="xristopoylos/index.html" class="folder-btn">ΧΡΙΣΤΟΠΟΥΛΟΣ</a>
+    <a href="diafores/index.html" class="folder-btn">ΔΙΑΦΟΡΕΣ</a>
+
+</div>
+
+<h2 class="section-title">👥 Συνάξεις - 🎉 Εκδηλώσεις</h2>
+<div class="group-container">
+    <a href="plateia/index.html" class="folder-btn">📜Στις Πλατείες</a>
+    <a href="geitonies/index.html" class="folder-btn">Στις Γειτονιές</a>
+    <a href="gamoi/index.html" class="folder-btn">Σε Γάμους-Βαφτίσεις</a>
+    <a href="xorafia/index.html" class="folder-btn">Χωράφια-Θέρος-Τρύγος</a>
+    <a href="ethima/index.html" class="folder-btn">Απόκριες - Πάσχα</a>
+    <a href="panhgyria/index.html" class="folder-btn">📜Πανηγύρια</a>
+    <a href="sxoleio/index.html" class="folder-btn">ΣΧΟΛΕΙΟ</a>
+    <a href="ekdromes/index.html" class="folder-btn">📜ΕΚΔΡΟΜΕΣ</a>
+    <a href="koulkada/index.html" class="folder-btn">📜ΚΟΥΛΚΑΔΑ</a>
+    <a href="topia/index.html" class="folder-btn">📜ΤΟΠΙΑ</a>
+    <a href="efhmerida/index.html" class="folder-btn">ΕΦΗΜΕΡΙΔΑ</a>
+    <a href="ekklhsies/index.html" class="folder-btn">📜ΕΚΚΛΗΣΙΕΣ-ΑΞΙΟΘΕΑΤΑ</a>
+</div>
+
+</div>
+<!-- ΑΟΡΑΤΕΣ ΠΕΡΙΓΡΑΦΕΣ ΓΙΑ ΑΝΑΖΗΤΗΣΗ -->
+<div id="search-data" style="display:none;">
+
+  <div data-family="ΤΣΑΟΥΣΗΣ">
+    1968 καφενείο χωριού. Διακρίνονται Δημήτρης Τσαούσης και Γιώργος Διονυσόπουλος.
+    1972 πανηγύρι Αγίας Παρασκευής. Παναγιώτης Τσαούσης.
+  </div>
+
+  <div data-family="ΔΙΟΝΥΣΟΠΟΥΛΟΣ">
+    1965 στην πλατεία. Γιώργος Διονυσόπουλος, Χρήστος Διονυσόπουλος.
+  </div>
+
+  <div data-family="ΑΝΑΣΤΑΣΟΠΟΥΛΟΣ">
+    1970 γάμος στο χωριό. Χρήστος Αναστασόπουλος.
+  </div>
+
+</div>
+<div class="footer-info">
+    Στείλτε υλικό στο xalbant@gmail.com
+    <a href="https://drive.google.com/" target="_blank" class="drive-btn">Google Drive</a>
+</div>
+
+<script>
+function filterNames() {
+  const input = document.getElementById("searchBar").value.toLowerCase();
+  const buttons = document.getElementsByClassName("folder-btn");
+  const dataBlocks = document.querySelectorAll("#search-data div");
+
+  for (let i = 0; i < buttons.length; i++) {
+
+    // καθαρίζουμε εικονίδια (📜 κτλ)
+    const familyName = buttons[i].innerText
+      .replace(/[^Α-Ωα-ωΆ-Ώά-ώ ]/g, "")
+      .trim()
+      .toLowerCase();
+
+    let found = familyName.includes(input);
+
+    dataBlocks.forEach(block => {
+      const fam = block.getAttribute("data-family").toLowerCase();
+      const text = block.innerText.toLowerCase();
+
+      if (fam === familyName && text.includes(input)) {
+        found = true;
+      }
+    });
+
+    buttons[i].style.display = found ? "" : "none";
+  }
+}
+</script>
+
 </body>
 </html>
-
-
